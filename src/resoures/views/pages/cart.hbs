@@ -1,0 +1,142 @@
+ <div class="app__container" style="padding: 30px 0px">
+        <div class="gird">
+            <div class="gird__row">
+
+                <div class="gird__column-12">
+                    
+                    {{#if carts}}
+                        <div class="cart__sale">
+                            <i class="fab fa-salesforce"></i>
+                            <span>Nhấn vào mục Mã giảm giá ở cuối trang để hưởng miễn phí vận chuyển bạn nhé!</span>
+                        </div>
+                        <form action="" method="post" id="formContent">
+
+                            <div class="cart__item-title">
+                                <div class="form-check cart__left-title">
+                                    <input type="checkbox" class="form-check-input" id="checkAll">
+                                    <label class="form-check-label" for="exampleCheck1">Sản phẩm</label>
+
+                                    <select class="form-control" name="action" style="width: 130px; margin: 0px 10px;">
+                                        <option value="">--Chọn--</option>
+                                        <option value="delete">Xóa</option>
+                                    </select>
+
+                                    <button class="btn btn-primary btnHandle" type="button" style="min-width: 65px; height: 25px;">Thực hiện</button>
+                                </div>
+
+                            <div class="cart__right-title">
+                                <div class="cart__unit-price">
+                                    <span>Đơn giá</span>
+                                </div>
+
+                                <div class="cart__amount">
+                                    <span>Số lượng</span>
+                                </div>
+
+                                <div class="cart__money">
+                                    <span>Số tiền</span>
+                                </div>
+
+                                <div class="cart__action">
+                                    <span>Thao tác</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                            {{#each carts}}
+                                <div class="cart__item-content">
+                                <div class="cart__left-content">
+                                    <input type="checkbox" class="form-check-input" value="{{ this._id }}" name="checkItem[]">
+                                    <img src="../../../image/{{ this.image }}" alt="">
+                                    <label class="form-check-label" for="exampleCheck1">{{ this.name }}</label>
+                                </div>
+
+                                <div class="cart__right-content">
+                                    <div class="cart__unit-price">
+                                        <span>{{ format_number this.price }}đ</span>
+                                    </div>
+
+                                    <div class="cart__amount">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <button type="button" data-id="{{ this._id }}" data-price="{{ this.price }}"  class="btn btn-light btnMinus" style="min-width: 50px">-</button>
+                                            <input type="text" value="{{ this.qty }}"  id="{{ this._id }}" style="width: 50px; min-width: 50px;" class="btn btn-light">
+                                            <button type="button" data-id="{{ this._id }}" class="btn btn-light btnPlus" style="min-width: 50px">+</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="cart__money">
+                                        <span class="{{ this._id }}">{{ format_number (multiplication this.price this.qty) }}đ</span>
+                                    </div>
+
+                                    <div class="cart__action">
+                                        <button type="button" class="btn btn-outline-danger btnDelete" data-id="{{ this._id }}">Xóa</button>
+                                    </div>
+                                </div>
+                            </div>
+                        {{/each}}
+
+                        <div class="cart__item-total">
+                            <div class="form-check cart__left-total">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Chọn tất cả sản phẩm ( <span id="totalQty">{{ totalQty }}</span> )</label>
+                            </div>
+
+                            <div class="cart__right-total">
+                                <span class="cart__right-total__label">Tổng tiền: </span>
+                                <span class="cart__right-total__money" id="total__money">{{ format_number total }} đ</span>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#payment">Mua ngay</button>
+                            </div>
+                        </div>
+                            
+                        </form>
+                    {{else}}
+                        <div class="no-cart">
+                            <img src="../../../image/no_cart.png" alt="">
+                            <p>Chưa có sản phẩm</p>
+                        </div>
+                    {{/if}}
+                </div>  
+                
+            </div>
+        </div>
+    </div>
+
+    {{!-- Modal thanh toán --}}
+
+    <div class="modal fade" id="payment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thanh toán</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" id="formPayment">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Tên khách hàng:</label>
+                        <input type="text" class="form-control" id="userName">
+                    </div>
+                   <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Địa chỉ:</label>
+                        <input type="text" class="form-control" id="address">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Số điện thoại:</label>
+                        <input type="text" class="form-control" id="phone">
+                        <input type="hidden" id="total" value="{{ total }}">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Trở lại</button>
+                <button type="button" class="btn btn-primary" id="btnSubmitPay">Hoàn thành</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+

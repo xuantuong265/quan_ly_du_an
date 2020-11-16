@@ -1,0 +1,43 @@
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+<div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Danh sách danh mục</h6>
+</div>
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th style="text-align: center;">Tên sản phẩm</th>
+                    <th style="text-align: center;">Giá sản phẩm</th>
+                    <th style="text-align: center;">Hình ảnh</th>
+                    <th style="text-align: center;">Đánh giá</th>
+                    <th style="text-align: center;">Chức năng</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                 {{#each results}}
+                    {{#each this.Products}}
+                        <tr>
+                            <th scope="row">{{ sum @index 1 }}</th>
+                            <td>{{this.name}}</td>
+                            <td>{{this.price}}</td>
+                            <td>
+                                <img src="../../image/{{this.image}}" alt="" style="width: 50px; height: 50px">
+                            </td>
+                            <td>{{this.star}}</td>
+                            <td style="text-align: center;">
+                                <a href="">Sửa</a> ||
+                                <a href="">Xóa</a>
+                            </td>
+                        </tr>
+                    {{/each}}
+                {{/each}}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+</div>

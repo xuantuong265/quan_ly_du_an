@@ -1,0 +1,134 @@
+ <div class="app__container" style="padding: 30px 0px">
+    <div class="gird">
+        <div class="gird__row content">
+            <div class="gird__column-5">
+                <div class="image__detail">
+                    <img src="../../../image/{{ product.image }}" alt="">
+                </div>
+            </div>
+            <div class="gird__column-7">
+                <div class="content__detail">
+                    <h3 class="name__detail">{{ product.name }}</h3>
+
+                    <div class="" style="display: flex; align-items: center;">
+                        <div class="product-item__rating">
+                            <span>5.0</span>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+
+                        <div class="count__comment">
+                            <span>1 Đánh giá</span>
+                        </div>
+                    </div>
+
+                    <div class="price_detail">
+                        <span class="price__old">{{ format_number (priceOld product.price) }} đ</span>   
+                        <span class="price__new">{{ format_number product.price }} </span>đ
+                    </div>
+
+                    <div class="amount">
+                        <span>Số lượng: </span>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" id="btn__minus" class="btn">-</button>
+                            <input type="text" value="1" id="value__cart" class="btn btn-light">
+                            <button type="button" id="btn__plus" class="btn ">+</button>
+                        </div>
+                    </div>
+
+                    <div class="add__cart">
+                        <button type="button" data-id="{{ product._id }}" class="btn btn-outline-danger btn-add__cart">Thêm vào giở hàng</button>
+                        <button type="button" class="btn btn-danger">Mua ngay</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="gird__row">
+            <div class="gird__column-12">
+                <div class="description__products">
+                    <h3 class="description__name">Mô tả sản phẩm</h3>
+                    <div class="description__content">
+                        {{ product.description }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $( document ).ready(function() {
+        minusCart();
+        plusCart();
+        addCart();
+    });
+
+    function minusCart() {
+       $('#btn__minus').click(function() {
+           let value = $('#value__cart').val();
+           if (value) {
+               value = parseInt(value);
+               if (value > 1) {
+                   value = value - 1;
+                   $('#value__cart').val(value);
+               }
+           }
+       });
+    }
+
+    function plusCart() {
+        $('#btn__plus').click(function() {
+             let value = $('#value__cart').val();
+           if (value) {
+               value = parseInt(value);
+               if (value < 10) {
+                   value = value + 1;
+                   $('#value__cart').val(value);
+               }
+           }
+        });
+    }
+
+    function addCart() {
+        $(".btn-add__cart").click(function(){
+
+            // lấy giá trị id của sản phẩm
+            $(".btn-add__cart").on('click', function(event) {
+                let id = $(this).attr("data-id");
+                let qty = $('#value__cart').val();
+
+                $.ajax({
+                    url: '/add-cart',
+                    type: 'POST',
+                    data: JSON.stringify({
+                        id: id,
+                        qty: qty,
+                    }),
+                    dataType: "json",
+                    cache: false, 
+                    contentType: "application/json",
+
+                    success: function(data) {
+                        //console.log(data.id);
+                        alert('Đã thêm vào giỏ hàng !!!');
+                    },
+
+                    error: function(error) {
+                        console.log(error);
+                        console.log('process error');
+                    },
+                });
+
+            });
+
+         
+        });
+    }
+
+</script>

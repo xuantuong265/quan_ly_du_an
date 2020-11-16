@@ -1,0 +1,39 @@
+<div class="main" style="width: 600px; margin: 30px auto">
+
+    <form autocomplete="off" action="/admin/product/store" method="post" enctype="multipart/form-data">
+         <div class="form-group">
+            <label for="formGroupExampleInput">Tên sản phẩm</label>
+            <input type="text" class="form-control" name="name">
+         </div>
+         <div class="form-group">
+            <label for="formGroupExampleInput">Giá sản phẩm</label>
+            <input type="text" class="form-control" name="price">
+         </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Hình ảnh</label>
+            <input type="file" name="img">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Mô tả sản phẩm</label>
+            <textarea class="form-control" id="description" name="description" rows="7"></textarea>
+         </div>
+         <div class="form-group">
+            <label for="formGroupExampleInput2">Chuyên mục</label>
+            <select name="subCategoryID" class="browser-default custom-select">
+
+                {{#each subCategories}}
+                    <option value="{{ this._id }}">{{ this.name }}</option>
+                {{/each}}
+
+            </select>
+        </div>
+         <button type="submit" class="btn btn-primary">Thêm sản phẩm</button> 
+    </form>
+
+</div>
+
+<script>
+
+    CKEDITOR.replace('description');
+
+</script>    

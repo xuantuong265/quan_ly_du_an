@@ -1,0 +1,33 @@
+ <nav class="category">
+    <h3 class="category_heading">
+        <i class="fas fa-list"></i>
+        <span>Danh mục</span>
+    </h3>
+
+    <ul class="category-list">
+        {{#each categories}}
+            <li class="category-item category-item__active">
+                <span class="categoty-item__link">{{ this.name }}</span>
+                <ul class="category-list__sub-menu">
+                    {{#each this.SubCategory}}
+                        <li class="category-item__sub">
+                            <a href="/{{ this.slug }}" class="categoty-item__link-sub">{{ this.name }}</a>
+                        </li>   
+                    {{/each}}
+                </ul>
+            </li>
+        {{/each}}
+    </ul>
+</nav>
+
+
+{{!-- Tìm kiếm theo giá --}}
+
+<div class="card mb-3" style="border: none;">
+    <div class="card-header" style="border: none;">Khoảng giá</div>
+    <div class="card-body text-primary">
+        <input type="text" class="form-control" placeholder="Từ" id="txtPriceStart"> </br>
+        <input type="text" class="form-control" placeholder="Đến" id="txtPriceEnd"> </br>
+        <button class="btn btn-danger btnFilterPrice" type="button" style="width: 100%;">Áp dụng</button>
+    </div>
+</div>

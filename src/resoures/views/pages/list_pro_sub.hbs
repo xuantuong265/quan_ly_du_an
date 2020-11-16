@@ -1,0 +1,84 @@
+<div class="home-filter">
+    <span class="home-filter__label">Sắp xếp theo</span>
+    <button class="btn home-filter__btn">Phổ biến</button>
+    <button class="btn home-filter__btn btn--primaty">Mới nhất</button>
+    <button class="btn home-filter__btn">Bán chạy</button>
+
+    <div class="select-input">
+        <span class="select-input__label">Giá</span>
+        <i class="fas fa-angle-down select-input__icon"></i>
+
+        <ul class="select-input__list">
+            <li class="select-input__item">
+                <a href="" class="select-input__link">Giá thấp đến cao</a>
+            </li>
+            <li class="select-input__item">
+                <a href="" class="select-input__link">Giá cao đến thấp</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="home-filter__page">
+        <span class="home-filter__page-num">
+            <span class="home-filter__page-current">1</span>
+            /14
+        </span>
+
+            <div class="home-filter__page-control">
+                <a href="" class="home-filter__page-btn disabled">
+                    <i class="fas fa-angle-left home-filter__page-btn--icon"></i>
+                </a>
+                <a href="" class="home-filter__page-btn">
+                    <i class="fas fa-angle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+<div class="home-product">
+    <div class="gird__row" id="search__content">
+        {{#each results}}
+            {{#each this.Product}}
+                <div class="gird__column-2-4">
+                    <div class="home-product-item">
+                        <a href="#">
+                            <div class="home-product-item__img" style="background-image: url('../../../image/{{ this.image }}');"></div>
+                        </a>
+                        <h4 class="home-product-item__name">{{ this.name }}</h4>
+                        <div class="home-product-item__price">
+                            <span class="home-product-item__price-old">{{ this.price }} đ</span>
+                            <span class="home-product-item__price-current">{{ this.price }} đ</span>
+                        </div>
+                        <div class="home-product-item__action">
+                            <span class="home-product-item__like">
+                                <i class="far fa-heart"></i>
+                                <!-- <i class="fas fa-heart"></i     -->
+                            </span>
+                            <div class="home-product-item__rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+
+                        <div class="home-product-item__origin">
+                            <span class="home-product-item__brand">Whoo</span>
+                            <span class="home-product-item__origin-title">Hàn Quốc</span>
+                        </div>
+
+                        <div class="home-product-item__favourite">
+                            <i class="fas fa-check home-product-item__favourite-icon"></i>
+                            <span class="home-product-item__favourite-title">Yêu thích</span>
+                        </div>
+
+                        <div class="home-product-item__safe-off">
+                            <span class="home-product-item__safe-off-percent">10%</span>
+                            <span class="home-product-item__safe-off-label">Giảm</span>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}  
+        {{/each}}  
+    </div>
+</div>

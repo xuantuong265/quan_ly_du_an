@@ -1,0 +1,33 @@
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+<div class="card-header py-3">
+    <a href="/admin/sub-category/create" class="m-0 font-weight-bold text-primary">Thêm chuyên mục</a>
+</div>
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th style="text-align: center;">Tên danh mục</th>
+                    <th style="text-align: center;">Chức năng</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                 {{#each results}}
+                    <tr>
+                        <th scope="row">{{ sum @index 1 }}</th>
+                        <td><a href="/admin/sub-category/{{ this.slug }}">{{ this.name }}</a></td>
+                        <td style="text-align: center;">
+                            <a href="">Sửa</a> ||
+                            <a href="">Xóa</a>
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+</div>
