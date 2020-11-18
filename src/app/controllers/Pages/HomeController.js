@@ -317,6 +317,14 @@ class HomeController {
 
     }
 
+    api(req, res, next) {
+        Product.find({})
+            .then((products) => {
+                res.json(products);
+            })
+            .catch(next);
+    }
+
 
 }
 
